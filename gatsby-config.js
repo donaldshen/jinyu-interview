@@ -15,6 +15,43 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    {
+      resolve: `gatsby-theme-i18n`,
+      options: {
+        defaultLang: `zh`,
+        configPath: require.resolve(`./i18n/config.json`),
+      },
+    },
+    {
+      resolve: `gatsby-theme-i18n-react-i18next`,
+      options: {
+        locales: `./i18n/react-i18next`,
+        i18nextOptions: {
+          ns: ["translation"],
+        },
+      },
+    },
+    `gatsby-theme-material-ui`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+            },
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/src/content`,
+      },
+    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
