@@ -14,9 +14,12 @@ module.exports = {
     author: `@gatsbyjs`,
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
+  flags: {
+    DEV_SSR: true,
+  },
   plugins: [
     {
-      resolve: `gatsby-theme-i18n`,
+      resolve: `@ericcote/gatsby-theme-i18n`,
       options: {
         defaultLang: `zh`,
         configPath: require.resolve(`./i18n/config.json`),

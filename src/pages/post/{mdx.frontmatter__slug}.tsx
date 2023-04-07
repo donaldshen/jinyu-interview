@@ -3,9 +3,13 @@ import Dashboard from "../../components/Dashboard"
 import { graphql, Link } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { Paper } from "@mui/material"
-import PreviewEditor from "../../components/PreviewEditor"
+// import PreviewEditor from "../../components/PreviewEditor"
 import Seo from "../../components/Seo"
 import styled from "@emotion/styled"
+
+const PreviewEditorLazy = React.lazy(
+  () => import("../../components/PreviewEditor")
+)
 
 const shortcodes = { Link } // Provide common components here
 
@@ -14,10 +18,15 @@ const Toolbar = styled.div({
 })
 
 export default function PostPage({ children, data }) {
+  const isSSR = typeof window === "undefined"
   return (
     <Dashboard>
       <Toolbar>
-        <PreviewEditor data={data.mdx} />
+        {!isSSR && (
+          <React.Suspense fallback={<div />}>
+            <PreviewEditorLazy data={data.mdx} />
+          </React.Suspense>
+        )}
       </Toolbar>
       <Paper
         sx={{
