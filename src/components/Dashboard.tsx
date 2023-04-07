@@ -11,7 +11,7 @@ import Divider from "@mui/material/Divider"
 import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
 import ListItems from "./ListItems"
-import { MenuItem, Select } from "@mui/material"
+import { Link, MenuItem, Select } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
 const drawerWidth: number = 240
@@ -98,9 +98,19 @@ export default function Dashboard({ children }) {
             >
               {t("dashboard")}
             </Typography>
+            <Link
+              color="inherit"
+              underline="hover"
+              sx={{ mr: 2 }}
+              href="https://github.com/donaldshen/jinyu-interview"
+              target="_blank"
+            >
+              {t("source")}
+            </Link>
             <Select
               label="i18n"
               value={lng}
+              size="small"
               onChange={evt => {
                 setLng(evt.target.value)
               }}
